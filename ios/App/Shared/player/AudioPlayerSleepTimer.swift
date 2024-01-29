@@ -34,6 +34,7 @@ extension AudioPlayer {
         logger.log("SLEEP TIMER: Sleeping in \(secondsUntilSleep) seconds")
         self.removeSleepTimer()
         self.sleepTimeRemaining = secondsUntilSleep
+        self.sleepTimeLastSelection = secondsUntilSleep
         
         DispatchQueue.runOnMainQueue {
             self.sleepTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
@@ -136,7 +137,7 @@ extension AudioPlayer {
     private func handleSleepEnd() {
         logger.log("SLEEP TIMER: Pausing audio")
         self.pause()
-        self.removeSleepTimer()
+        self.setSleepTimer(secondsUntilSleep: self.sleepTimeLastSelection ?? 0)
     }
     
     private func removeChapterSleepTimer() {

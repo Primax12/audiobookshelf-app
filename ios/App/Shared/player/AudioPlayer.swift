@@ -52,6 +52,7 @@ class AudioPlayer: NSObject {
     internal var sleepTimeChapterToken: Any?
     internal var sleepTimer: Timer?
     internal var sleepTimeRemaining: Double?
+    internal var sleepTimeLastSelection: Double?
     
     internal var currentTrackIndex = 0
     private var allPlayerItems:[AVPlayerItem] = []
